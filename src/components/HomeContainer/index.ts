@@ -14,6 +14,9 @@ export const HomeContainer = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   padding: 50px;
+  @media screen and (max-width: 640px) {
+    display: block;
+  }
 `;
 
 export { DecorateBox };
