@@ -35,6 +35,10 @@ const config = {
     }),
     new CompressionPlugin(),
   ],
+  performance: {
+    maxAssetSize: 100000,
+    maxEntrypointSize: 400000,
+  },
 };
 
 module.exports = merge(config, plugins, resolve);
