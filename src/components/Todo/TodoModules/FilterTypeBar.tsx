@@ -10,6 +10,11 @@ export const Label = styled.label<LabelProps>`
   border-bottom: 3px solid ${({ checked }) => (checked ? "#333333" : "#9F9A91")};
   color: ${({ checked }) => (checked ? "#333333" : "#9F9A91")};
   transition: 0.228s;
+  @media screen and (max-width: 640px) {
+    padding: 16px 25px;
+    text-align: center;
+    flex: 1;
+  }
 `;
 Label.displayName = "Label";
 
@@ -21,7 +26,7 @@ Label.displayName = "Label";
 const FilterTypeBar = ({ children }: { children: any }) => {
   return (
     <>
-      <div className="todo-flex todo-justify-center todo-items-center todo-font-bold">
+      <div className="todo-flex todo-flex-wrap todo-justify-center todo-items-center todo-font-bold">
         {children}
       </div>
     </>

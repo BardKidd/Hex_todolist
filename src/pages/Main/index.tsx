@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MainContainer, Navbar } from "@/components/MainContainer";
+import { MainContainer, Navbar, MainStyles } from "@/components/MainContainer";
 import { userLogout } from "./MainAction";
 import Todo, { TodoModule } from "@/components/Todo";
 import styled from "styled-components";
@@ -14,19 +14,6 @@ import {
   changeStatusTodos,
 } from "./MainAction";
 import type { RootState } from "@/store";
-
-const MainStyles = styled.div`
-  background: linear-gradient(
-    172.7deg,
-    #ffd370 5.12%,
-    #ffd370 53.33%,
-    #ffd370 53.44%,
-    #ffffff 53.45%,
-    #ffffff 94.32%
-  );
-  padding: 50px;
-`;
-MainStyles.displayName = "MainStyles";
 
 interface TodoItemType {
   id: string;

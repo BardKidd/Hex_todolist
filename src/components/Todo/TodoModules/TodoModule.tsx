@@ -17,7 +17,11 @@ export const TodoBox = styled.div`
 TodoBox.displayName = "TodoBox";
 
 const TodoModule = ({ children }: { children: any }) => {
-  return <div className="todo-min-w-[500px]">{children}</div>;
+  return (
+    <div className="todo-w-full sm:todo-w-2/5 sm:todo-min-w-[500px]">
+      {children}
+    </div>
+  );
 };
 
 export default TodoModule;

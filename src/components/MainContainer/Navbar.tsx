@@ -12,7 +12,7 @@ const UserAccount = ({ onClick }: NavbarProps) => {
   }
   return (
     <div className="todo-flex todo-justify-center todo-align-center">
-      <h2 className="todo-font-bold todo-text-base todo-mr-4 todo-mb-0">
+      <h2 className="todo-hidden sm:todo-inline-block todo-font-bold todo-text-base todo-mr-4 todo-mb-0">
         {nickname} 的代辦
       </h2>
       <button type="button" onClick={() => onClick()}>
