@@ -44,7 +44,7 @@ const Register = (props: RegisterProps) => {
 
   useEffect(() => {
     if (state === "註冊成功") {
-      notification.info({
+      notification.success({
         message: "成功",
         description: state,
       });
