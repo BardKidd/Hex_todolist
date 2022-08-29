@@ -5,6 +5,7 @@ import Todo, { TodoModule } from "@/components/Todo";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import checkAuth from "@/utils/Auth";
 import {
   getTodos,
   addTodos,
@@ -56,10 +57,6 @@ const Main: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getTodos());
-  }, []);
-
-  useEffect(() => {
     let current = [];
     current = todos.filter((item: TodoItemType) => {
       if (item.completed_at && filterType === "finished") {
@@ -75,8 +72,10 @@ const Main: React.FC = () => {
   }, [filterType, JSON.stringify(todos)]);
 
   useEffect(() => {
-    if (loginMessage === "已登出" && !loginState) {
+    if ((loginMessage === "已登出" && !loginState) || !checkAuth()) {
       history("/");
+    } else {
+      dispatch(getTodos());
     }
   }, [loginMessage, loginState]);
 

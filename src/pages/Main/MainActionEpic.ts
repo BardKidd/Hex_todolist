@@ -44,10 +44,14 @@ const getTodosEpic = (action$: any) => {
         of(LoadingAction.loadingStatus(true)),
         from(Resource.MainResource.getTodos()).pipe(
           mergeMap((response): any => {
-            return concat(
-              of(getTodosSuccess(response)),
-              of(LoadingAction.loadingStatus(false))
-            );
+            if (response.status === 200) {
+              return concat(
+                of(getTodosSuccess(response)),
+                of(LoadingAction.loadingStatus(false))
+              );
+            } else {
+              return concat(of(LoadingAction.loadingStatus(false)));
+            }
           }),
           catchError(() => {
             return concat(of(LoadingAction.loadingStatus(false)));

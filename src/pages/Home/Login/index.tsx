@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "./LoginAction";
+import checkAuth from "@/utils/Auth";
 import type { RootState } from "@/store";
 
 interface LoginProps {
@@ -42,7 +43,8 @@ const Login = (props: LoginProps) => {
   });
 
   useEffect(() => {
-    if (loginMessage === "登入成功" && loginState) {
+    // 重整 Redux 資料會消失，所以多加個 sessionStorage 判斷
+    if ((loginMessage === "登入成功" && loginState) || checkAuth()) {
       history("main");
     }
   }, [loginState, loginMessage]);
