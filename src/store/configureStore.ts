@@ -5,7 +5,6 @@ import {
 } from "redux";
 import epicMiddleware from "@/middleware";
 import rootEpic from "@/epics";
-// import type { Store } from "redux";
 import rootReducer from "@/reducers";
 
 // applyMiddleware 實際運作參考
@@ -40,12 +39,6 @@ function logger({ getState }: { getState: any }) {
 export default function configureStore(history: any, preloadedState = {}) {
   let composeEnhancers =
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  // if (
-  //   process.env.NODE_ENV !== "production" &&
-  //   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  // ) {
-  //   composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-  // }
 
   const middleware = [epicMiddleware, logger];
 
