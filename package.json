@@ -1,6 +1,6 @@
 {
   "name": "StarterKit",
-  "homepage": "https://bardkidd.github.io/Hex_todolist",
+  "homepage": "https://bardkidd.github.io/hex_todolist",
   "version": "1.0.0",
   "description": "",
   "main": "index.tsx",
@@ -11,7 +11,8 @@
     "lint": "eslint --fix src/*.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:jest": "jest",
-    "test:jest--coverage": "jest --coverage"
+    "test:jest--coverage": "jest --coverage",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
@@ -69,6 +70,7 @@
     "axios": "^0.27.2",
     "babel-plugin-macros": "^3.1.0",
     "formik": "^2.2.9",
+    "gh-pages": "^4.0.0",
     "history": "^5.3.0",
     "postcss-preset-env": "^7.7.2",
     "ramda": "^0.28.0",

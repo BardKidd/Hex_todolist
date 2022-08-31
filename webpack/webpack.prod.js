@@ -16,7 +16,6 @@ const config = {
     path: path.resolve("dist"),
     filename: "js/index.[contenthash].js",
     // 打包後使用 BrowserRouter 才不會掛掉
-    publicPath: "./",
     clean: true,
   },
   devtool: "eval-cheap-source-map",

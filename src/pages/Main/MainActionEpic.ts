@@ -50,6 +50,7 @@ const getTodosEpic = (action$: any) => {
                 of(LoadingAction.loadingStatus(false))
               );
             } else {
+              sessionStorage.clear();
               return concat(of(LoadingAction.loadingStatus(false)));
             }
           }),
