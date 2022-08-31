@@ -16,3 +16,10 @@
 - 必做：登入、註冊 API 功能
 - 必做：表單欄位為空值或非 Email 格式時，需提醒用戶。(例：alert 彈跳、紅色文字顯示、- SweetAlert2)
 - 必做：需處理重複帳號註冊時， API 回傳錯誤時，需提醒用戶。(例：alert 彈跳、紅色文字顯示、SweetAlert2)
+
+## 本次練習需要注意的點
+
+1. Webpack5 配置
+2. GitHub 部屬問題
+3. BrowserRouter 就算本地沒問題，部屬上去還是會出事
+4. 有設定 dev 專屬的情況，也要考慮 prod 的時候 function 是否依舊正常
