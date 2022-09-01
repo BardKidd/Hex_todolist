@@ -22,8 +22,9 @@ const AddNewItem = ({
   };
 
   const sendData = () => {
-    if (value) {
-      dispatch(pushSomeThing(value));
+    if (value.trim() !== "") {
+      console.log("value", typeof value);
+      dispatch(pushSomeThing(value.trim()));
       addItem("");
     } else {
       notification.info({
