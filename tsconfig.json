@@ -9,6 +9,8 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "baseUrl": "./src",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "paths": {
       "@/*": ["*"]
     }
