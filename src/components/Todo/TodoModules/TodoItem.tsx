@@ -76,6 +76,7 @@ const TodoItem = ({
         <>
           <div className="todo-flex todo-flex-1 todo-border-b todo-border-[#E5E5E5] todo-pb-4">
             <img
+              data-testid={completed_at ? "tick" : "checkbox"}
               className="todo-cursor-pointer"
               src={completed_at ? tick : checkbox}
               onClick={() => changeStatus()}

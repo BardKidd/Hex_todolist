@@ -23,7 +23,6 @@ const AddNewItem = ({
 
   const sendData = () => {
     if (value.trim() !== "") {
-      console.log("value", typeof value);
       dispatch(pushSomeThing(value.trim()));
       addItem("");
     } else {
