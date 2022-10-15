@@ -11,7 +11,7 @@
     "lint": "eslint --fix src/*.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage --coverageReporters=coveralls",
+    "test:coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],
