@@ -55,5 +55,3 @@ test("DecorateBox render", async () => {
 </div>
 `);
 });
-
-test("Login error", async () => {});
