@@ -5,6 +5,8 @@ import { store, history } from "@/store";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import Home from "../index";
+import * as LoginAction from "../Login/LoginAction";
+import { mockStore } from "../../../__mocks__/setUp";
 
 test("[Home][Click Register Btn should change component]", async () => {
   const { container } = render(
@@ -148,4 +150,132 @@ test("[Home][Click Register Btn should change component]", async () => {
   </div>
 </div>
 `);
+});
+
+test("[Home][Click Login Btn should change component]", async () => {
+  const { container } = render(
+    <Provider store={store}>
+      <HashRouter>
+        <Home />
+      </HashRouter>
+    </Provider>
+  );
+
+  const loginBtn = screen.getByRole("button", {
+    name: /登入/i,
+  });
+
+  userEvent.click(loginBtn);
+  await waitFor(() => {
+    screen.getByRole("heading", {
+      name: /最實用的線上代辦事項服務/i,
+    });
+  });
+
+  expect(
+    screen.getByRole("heading", {
+      name: /最實用的線上代辦事項服務/i,
+    })
+  ).toBeInTheDocument();
+
+  expect(container).toMatchInlineSnapshot(`
+<div>
+  <div
+    class="sc-bczRLJ lggcRq"
+  >
+    <div
+      class="todo-block sm:todo-flex sm:todo-flex-col sm:todo-content-center sm:todo-justify-center"
+    >
+      <div
+        class="todo-flex todo-justify-center todo-items-center todo-text-center"
+      >
+        <img
+          alt="裝飾標題相片"
+          class="todo-inline-block"
+          src="test-file-stub"
+        />
+        <img
+          alt="裝飾標題相片"
+          class="todo-inline-block"
+          src="test-file-stub"
+        />
+      </div>
+      <img
+        alt="裝飾人物相片"
+        class="todo-hidden sm:todo-block todo-mx-auto todo-mt-4"
+        src="test-file-stub"
+      />
+    </div>
+    <form
+      class="sm:todo-p-12"
+    >
+      <h1
+        class="todo-mb-6 todo-font-bold todo-text-2xl todo-text-center todo-mt-5 sm:todo-mt-0 sm:todo-text-left"
+      >
+        最實用的線上代辦事項服務
+      </h1>
+      <div
+        class="todo-mb-4"
+      >
+        <p
+          class="todo-font-bold todo-font-text-sm todo-leading-5 todo-mb-1"
+        >
+          Email
+        </p>
+        <input
+          class="todo-px-3 todo-font-medium todo-text-base todo-py-4 todo-w-full todo-text-[#9F9A91] todo-leading-6	todo-rounded-lg todo-mb-1 todo-min-w-[300px] placeholder:todo-font-medium placeholder:todo-text-[#9F9A91]"
+          name="email"
+          placeholder="請輸入Email"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="todo-mb-4"
+      >
+        <p
+          class="todo-font-bold todo-font-text-sm todo-leading-5 todo-mb-1"
+        >
+          密碼
+        </p>
+        <input
+          class="todo-px-3 todo-font-medium todo-text-base todo-py-4 todo-w-full todo-text-[#9F9A91] todo-leading-6	todo-rounded-lg todo-mb-1 todo-min-w-[300px] placeholder:todo-font-medium placeholder:todo-text-[#9F9A91]"
+          name="password"
+          placeholder="請輸入密碼"
+          type="password"
+          value=""
+        />
+      </div>
+      <button
+        class="sc-gsnTZi cJMgXC"
+        type="submit"
+      >
+        登入
+      </button>
+      <button
+        class="sc-gsnTZi imjRGd"
+        type="button"
+      >
+        註冊
+      </button>
+    </form>
+  </div>
+</div>
+`);
+});
+
+test("[Home][發送 userLogin Action]", async () => {
+  const initialState = {};
+
+  const store = mockStore(initialState);
+
+  const user = {
+    email: "qwerty@gmail.com",
+    password: "123456789",
+  };
+
+  await store.dispatch(LoginAction.userLogin(user));
+
+  expect(store.getActions()[0].type).toEqual(LoginAction.createType.USER_LOGIN);
+  expect(store.getActions()[0].user).toEqual(user);
 });
