@@ -1,7 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import AddNewItem from "../AddNewItem";
+import TodoItem from "../TodoItem";
 import * as redux from "react-redux";
-import { store, history } from "@/store";
+// import { store, history } from "@/store";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { mockStore } from "../../../../__mocks__/setUp";
@@ -106,4 +107,111 @@ test("[TodoModules AddNewItem][AddNewItem component 可以送 action]", async ()
     MainAction.createType.MAIN_ADD_TODOS
   );
   expect(store.getActions()[0].content).toEqual(content);
+});
+
+test("[TodoModules TodoItem][TodoItem component render]", async () => {
+  const key = "9999";
+  const itemInfo = {
+    id: "8888",
+    content: "測試中",
+    completed_at: "",
+  };
+  const handleEdit = jest.fn();
+  const handleDelete = jest.fn();
+  const handleChangeStatus = jest.fn();
+  render(
+    <TodoItem
+      key={key}
+      itemInfo={itemInfo}
+      handleEdit={handleEdit}
+      handleDelete={handleDelete}
+      handleChangeStatus={handleChangeStatus}
+    />
+  );
+
+  const Item = screen.getByText(/測試中/i);
+
+  expect(Item).toBeInTheDocument();
+});
+
+test("[TodoModules TodoItem][TodoItem is editing]", async () => {
+  const key = "9999";
+  const itemInfo = {
+    id: "8888",
+    content: "測試中",
+    completed_at: "",
+  };
+  const handleEdit = jest.fn();
+  const handleDelete = jest.fn();
+  const handleChangeStatus = jest.fn();
+  render(
+    <TodoItem
+      key={key}
+      itemInfo={itemInfo}
+      handleEdit={handleEdit}
+      handleDelete={handleDelete}
+      handleChangeStatus={handleChangeStatus}
+    />
+  );
+
+  const Item = screen.getByText(/測試中/i);
+
+  userEvent.click(Item);
+  await waitFor(() => {
+    screen.getByRole("textbox");
+  });
+
+  expect(screen.getByRole("textbox")).toBeInTheDocument();
+});
+
+test("[TodoModules TodoItem][TodoItem call changeStatue]", async () => {
+  const key = "9999";
+  let itemInfo = {
+    id: "8888",
+    content: "測試中",
+    completed_at: "",
+  };
+  const handleEdit = jest.fn();
+  const handleDelete = jest.fn();
+  const handleChangeStatus = jest.fn();
+
+  //* 點擊 checkbox 會觸發 dispatch，所以要 mock。然後必須在 render 前執行。
+  const useDispatchSpy = jest.spyOn(redux, "useDispatch");
+  const dispatch = jest.fn();
+  await useDispatchSpy.mockReturnValue(dispatch);
+
+  const { rerender } = render(
+    <TodoItem
+      key={key}
+      itemInfo={itemInfo}
+      handleEdit={handleEdit}
+      handleDelete={handleDelete}
+      handleChangeStatus={handleChangeStatus}
+    />
+  );
+
+  const Checkbox = screen.getByTestId("checkbox");
+
+  // screen.debug(Checkbox);
+  await userEvent.click(Checkbox);
+
+  itemInfo = {
+    id: "8888",
+    content: "測試中",
+    completed_at: "2022-10-15",
+  };
+
+  rerender(
+    <TodoItem
+      key={key}
+      itemInfo={itemInfo}
+      handleEdit={handleEdit}
+      handleDelete={handleDelete}
+      handleChangeStatus={handleChangeStatus}
+    />
+  );
+
+  const Tick = screen.getByTestId("tick");
+
+  expect(Tick).toBeInTheDocument();
 });
