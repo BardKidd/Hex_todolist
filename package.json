@@ -11,7 +11,7 @@
     "lint": "eslint --fix src/*.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --config=jest.config.json --coverage",
+    "test:coverage": "jest --coverage",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],
